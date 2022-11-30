@@ -67,6 +67,5 @@ public class Enemies : KinematicBody2D
     {
         // implement damaged to entities
         HealthPoint -= damagePower;
-        GD.Print("enemy : ", HealthPoint);
     }
 }
