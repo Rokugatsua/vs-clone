@@ -2,13 +2,11 @@
 
 [ext_resource path="res://scenes/entities/player/Player.cs" type="Script" id=1]
 [ext_resource path="res://assets/sprites/player/knight.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://components/entities/Hurtbox.cs" type="Script" id=3]
+[ext_resource path="res://scenes/components/hurtbox/Hurtbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/entities/player/player_hurtbox.tres" type="Shape2D" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.0
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 6, 10 )
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 z_index = 1
@@ -27,13 +25,5 @@ animation = "idle"
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
-[node name="HurtBox" type="Area2D" parent="."]
-collision_layer = 32
-collision_mask = 0
-input_pickable = false
-monitoring = false
-script = ExtResource( 3 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2( 0, -3 )
-shape = SubResource( 2 )
+[node name="Hurtbox" parent="." instance=ExtResource( 3 )]
+areaBody = ExtResource( 4 )

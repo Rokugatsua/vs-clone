@@ -1,51 +1,49 @@
 using Godot;
-using System;
 
 public class Player : KinematicBody2D
 {
+
+    [Export] float MovementSpeed = 120.0f;
+
+
     private const float FlipTolerance = 10.0f; // in pixel
-    private Vector2 velocity = Vector2.Zero;
-
-    [Export] float moveSpeed = 120.0f;
-
-
+    private Vector2 _velocity = Vector2.Zero;
     private AnimatedSprite animatedSprite;
-
-    private Area2D hurtbox;
+    private Area2D Hurtbox;
 
 
     public override void _Ready()
     {
         // @onready
         animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
-        hurtbox = GetNode<Area2D>("HurtBox") as Hurtbox;
+        Hurtbox = GetNode<Area2D>("Hurtbox") as Hurtbox;
 
         animatedSprite.Animation = "idle";
         animatedSprite.Playing = true;
 
 
         // Connections
-        hurtbox.Connect("on_damaged", this, nameof(_onDamaged));
+        Hurtbox.Connect("on_damaged", this, nameof(OnDamaged));
     }
 
 
     public override void _PhysicsProcess(float delta)
     {
         // move character of player
-        Vector2 getDirection = getInputDirection();
-        velocity = getDirection.Normalized() * moveSpeed;
-        velocity = MoveAndSlide(velocity);
+        Vector2 getDirection = GetInputDirection();
+        _velocity = getDirection.Normalized() * MovementSpeed;
+        _velocity = MoveAndSlide(_velocity);
     }
 
 
     public override void _Process(float delta)
     {
 
-        if (velocity != Vector2.Zero && animatedSprite.Animation != "run") 
+        if (_velocity != Vector2.Zero && animatedSprite.Animation != "run") 
         {
             animatedSprite.Animation = "run";
         }
-        else if (velocity == Vector2.Zero && animatedSprite.Animation != "idle")
+        else if (_velocity == Vector2.Zero && animatedSprite.Animation != "idle")
         {
             animatedSprite.Animation = "idle";
         }
@@ -53,18 +51,18 @@ public class Player : KinematicBody2D
 
 
         // flip sprite based of direction
-        if (velocity.x < -FlipTolerance && !animatedSprite.FlipH)
+        if (_velocity.x < -FlipTolerance && !animatedSprite.FlipH)
         {
             animatedSprite.FlipH = true;
         }
-        else if (velocity.x > FlipTolerance && animatedSprite.FlipH)
+        else if (_velocity.x > FlipTolerance && animatedSprite.FlipH)
         {
             animatedSprite.FlipH = false;
         }
     }
 
 
-    public Vector2 getInputDirection()
+    public Vector2 GetInputDirection()
     {
         // input
         Vector2 direction = new Vector2();
@@ -73,7 +71,7 @@ public class Player : KinematicBody2D
         return direction;
     }
 
-    private void _onDamaged(int damagePower)
+    private void OnDamaged(int damagePower)
     {
         // implement damaged
     }

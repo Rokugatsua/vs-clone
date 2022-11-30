@@ -16,7 +16,7 @@ public class Enemies : KinematicBody2D
     {
         // @onready
         animatedSprite2D = GetNode<AnimatedSprite>("AnimatedSprite");
-        hurtbox = GetNode<Area2D>("HurtBox") as Hurtbox;
+        hurtbox = GetNode<Area2D>("Hurtbox") as Hurtbox;
 
         // animated sprite configuration
         animatedSprite2D.Animation = "idle";
