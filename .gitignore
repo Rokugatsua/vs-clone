@@ -19,3 +19,8 @@ lib/
 # Test
 test/
 
+# docs
+docs/
+
+# vscode
+.vscode/
