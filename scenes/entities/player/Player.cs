@@ -4,6 +4,7 @@ public class Player : KinematicBody2D
 {
 
     [Export] float MovementSpeed = 120.0f;
+    [Export] public int HealthPoint = 100;
 
 
     private const float FlipTolerance = 10.0f; // in pixel
@@ -23,7 +24,7 @@ public class Player : KinematicBody2D
 
 
         // Connections
-        Hurtbox.Connect("on_damaged", this, nameof(OnDamaged));
+        Hurtbox.Connect("on_hurted", this, nameof(OnDamaged));
     }
 
 
@@ -74,5 +75,6 @@ public class Player : KinematicBody2D
     private void OnDamaged(int damagePower)
     {
         // implement damaged
+        HealthPoint -= damagePower;
     }
 }
