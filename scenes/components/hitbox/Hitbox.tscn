@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/components/hitbox/Hitbox.cs" type="Script" id=1]
+
+[node name="Hitbox" type="Area2D"]
+modulate = Color( 0, 0, 1, 1 )
+input_pickable = false
+monitorable = false
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="CooldownTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
