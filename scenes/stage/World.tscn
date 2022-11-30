@@ -1,8 +1,22 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/entities/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/stage/World.cs" type="Script" id=2]
+[ext_resource path="res://assets/test/new_noisetexture.tres" type="Texture" id=3]
+[ext_resource path="res://scenes/entities/enemies/Enemies.tscn" type="PackedScene" id=4]
 
 [node name="World" type="Node2D"]
+script = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 400, 155 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 481, 280 )
+texture = ExtResource( 3 )
+
+[node name="Enemies" parent="." instance=ExtResource( 4 )]
