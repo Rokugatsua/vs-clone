@@ -78,13 +78,11 @@ move_down={
 
 [layer_names]
 
-2d_physics/layer_1="player"
-2d_physics/layer_2="enemies"
-2d_physics/layer_3="environment"
-2d_physics/layer_4="items"
-2d_physics/layer_5="hitbox"
-2d_physics/layer_6="hurtbox"
-2d_physics/layer_7="coins"
+2d_physics/layer_1="world"
+2d_physics/layer_2="player"
+2d_physics/layer_3="enemy"
+2d_physics/layer_4="item"
+2d_physics/layer_5="coins"
 
 [mono]
 
