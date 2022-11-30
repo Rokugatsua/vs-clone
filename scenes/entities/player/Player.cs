@@ -10,10 +10,17 @@ public class Player : KinematicBody2D
 
     private AnimatedSprite animatedSprite;
 
+    private Area2D hurtbox;
+
 
     public override void _Ready()
     {
+        // @onready
         animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
+        hurtbox = GetNode<Area2D>("HurtBox") as Hurtbox;
+
+        // Connections
+        hurtbox.Connect("on_damaged", this, nameof(_onDamaged));
     }
 
 
@@ -52,4 +59,8 @@ public class Player : KinematicBody2D
         return direction;
     }
 
+    private void _onDamaged(int damagePower)
+    {
+        // implement damaged
+    }
 }
