@@ -3,37 +3,40 @@ using System;
 
 public class Hurtbox : Area2D
 {
+    [Signal] delegate void on_hurted(int damagePower);
+    
+    [Export] private Shape2D _areaShape;
+    private CollisionShape2D _collisionShape2D;
+    private Timer _cooldownTimer;
 
-    [Signal] delegate void on_damaged(int damagePower);
-    
-    
-    [Export] Shape2D areaBody;
-    CollisionShape2D collisionShape2D;
     public override void _Ready()
     {
-        //@onready
-        collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
-        collisionShape2D.Shape = areaBody;
+        // @onready
+        _collisionShape2D = GetNode<CollisionShape2D>("CollisionShape2D");
+        _collisionShape2D.Shape = _areaShape;
+        _cooldownTimer = GetNode<Timer>("CooldownTimer");
 
         // change color of hurt box
-        this.Modulate = new Color(0, 0.9f, 0, 1); // yellow collor
+        Modulate = new Color(0, 0.9f, 0, 1); // yellow collor
 
-
-        // Colision Mask
-        this.SetCollisionLayerBit(0, false);
-        this.SetCollisionMaskBit(0, false);
-
-        this.SetCollisionLayerBit(5, true);
+        // Connections
+        _cooldownTimer.Connect("timeout", this, nameof(OnCooldownTimerTimeout));
     }
 
-    public void disableCollision(bool isDisabled=true)
+    public void DisableCollision(bool isDisabled=true)
     {
-        
-        collisionShape2D?.SetDeferred("disabled", true);
+        _collisionShape2D?.CallDeferred("set", "disabled", isDisabled);
     }
 
-    public void damage(int damagePower)
+    public void Damaged(int damagePower)
     {
-        EmitSignal(nameof(on_damaged), damagePower);
+        DisableCollision(true);
+        EmitSignal(nameof(on_hurted), damagePower);
+        _cooldownTimer.Start();
+    }
+
+    private void OnCooldownTimerTimeout()
+    {
+        DisableCollision(false);
     }
 }
