@@ -2,8 +2,8 @@
 
 this a vampire survior clone made with godot engine.
 
-## reqirement
-- Godot engine 3.5.1 Mono version
+## Requirement
+- Godot engine 3.5.1 Mono Stable version
 - .Net 6.0
 
 ## Lisence
