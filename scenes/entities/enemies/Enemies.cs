@@ -3,8 +3,9 @@ using System;
 
 public class Enemies : KinematicBody2D
 {
-    Player player;
+    private const float FlipTolerance = 10.0f; // in pixel
 
+    Player player;
 
     private Vector2 velocity = new Vector2();
     [Export] float moveSpeed = 100f;
@@ -42,15 +43,21 @@ public class Enemies : KinematicBody2D
 
     public override void _Process(float delta)
     {
-        if (velocity != Vector2.Zero)
+        if (velocity != Vector2.Zero && animatedSprite2D.Animation != "run")
         {
-            animatedSprite2D.Play("run");
+            animatedSprite2D.Animation = "run";
         }
-        if (velocity.x < 0.0f)
+        else if (velocity == Vector2.Zero && animatedSprite2D.Animation != "idle")
+        {
+            animatedSprite2D.Animation = "idle";
+        }
+
+        // flip prite base direction move
+        if (velocity.x < -FlipTolerance && !animatedSprite2D.FlipH)
         {
             animatedSprite2D.FlipH = true;
         }
-        else if (velocity.x > 0.0f)
+        else if (velocity.x > -FlipTolerance && animatedSprite2D.FlipH)
         {
             animatedSprite2D.FlipH = false;
         }

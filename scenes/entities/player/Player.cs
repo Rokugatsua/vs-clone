@@ -3,6 +3,7 @@ using System;
 
 public class Player : KinematicBody2D
 {
+    private const float FlipTolerance = 10.0f; // in pixel
     private Vector2 velocity = Vector2.Zero;
 
     [Export] float moveSpeed = 120.0f;
@@ -18,6 +19,10 @@ public class Player : KinematicBody2D
         // @onready
         animatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
         hurtbox = GetNode<Area2D>("HurtBox") as Hurtbox;
+
+        animatedSprite.Animation = "idle";
+        animatedSprite.Playing = true;
+
 
         // Connections
         hurtbox.Connect("on_damaged", this, nameof(_onDamaged));
@@ -35,15 +40,24 @@ public class Player : KinematicBody2D
 
     public override void _Process(float delta)
     {
-        base._Process(delta);
+
+        if (velocity != Vector2.Zero && animatedSprite.Animation != "run") 
+        {
+            animatedSprite.Animation = "run";
+        }
+        else if (velocity == Vector2.Zero && animatedSprite.Animation != "idle")
+        {
+            animatedSprite.Animation = "idle";
+        }
+
 
 
         // flip sprite based of direction
-        if (velocity.x < 0)
+        if (velocity.x < -FlipTolerance && !animatedSprite.FlipH)
         {
             animatedSprite.FlipH = true;
         }
-        else if (velocity.x > 0)
+        else if (velocity.x > FlipTolerance && animatedSprite.FlipH)
         {
             animatedSprite.FlipH = false;
         }
