@@ -5,67 +5,68 @@ public class Enemies : KinematicBody2D
 {
     private const float FlipTolerance = 10.0f; // in pixel
 
-    Player player;
-
-    private Vector2 velocity = new Vector2();
+    private Vector2 _velocity = new Vector2();
     [Export] float moveSpeed = 100f;
+    [Export] public int HealthPoint = 100;
 
-    AnimatedSprite animatedSprite2D;
-    Area2D hurtbox;
+    private Player _player;
+    private AnimatedSprite _animatedSprite2D;
+    private Area2D _hurtbox;
+
     public override void _Ready()
     {
         // @onready
-        animatedSprite2D = GetNode<AnimatedSprite>("AnimatedSprite");
-        hurtbox = GetNode<Area2D>("Hurtbox") as Hurtbox;
+        _animatedSprite2D = GetNode<AnimatedSprite>("AnimatedSprite");
+        _hurtbox = GetNode<Area2D>("Hurtbox") as Hurtbox;
 
         // animated sprite configuration
-        animatedSprite2D.Animation = "idle";
-        animatedSprite2D.Playing = true;
+        _animatedSprite2D.Animation = "idle";
+        _animatedSprite2D.Playing = true;
 
-
-        player = GetTree().GetNodesInGroup("player")[0] as Player;
-        GD.Print(player);
+        _player = GetTree().GetNodesInGroup("player")[0] as Player;
         
-
         // connections
-        hurtbox.Connect("on_damaged", this, nameof(_onDamaged));
-
+        _hurtbox.Connect("on_hurted", this, nameof(OnDamaged));
     }
-
 
     public override void _PhysicsProcess(float delta)
     {
-        Vector2 directionToPlayer = GlobalPosition.DirectionTo(player.GlobalPosition);
-        velocity = MoveAndSlide(directionToPlayer * moveSpeed);
-
+        // Movement
+        Vector2 directionToPlayer = GlobalPosition.DirectionTo(_player.GlobalPosition);
+        _velocity = MoveAndSlide(directionToPlayer * moveSpeed);
     }
-
 
     public override void _Process(float delta)
     {
-        if (velocity != Vector2.Zero && animatedSprite2D.Animation != "run")
+        if (_velocity != Vector2.Zero && _animatedSprite2D.Animation != "run")
         {
-            animatedSprite2D.Animation = "run";
+            _animatedSprite2D.Animation = "run";
         }
-        else if (velocity == Vector2.Zero && animatedSprite2D.Animation != "idle")
+        else if (_velocity == Vector2.Zero && _animatedSprite2D.Animation != "idle")
         {
-            animatedSprite2D.Animation = "idle";
+            _animatedSprite2D.Animation = "idle";
         }
 
         // flip prite base direction move
-        if (velocity.x < -FlipTolerance && !animatedSprite2D.FlipH)
+        if (_velocity.x < -FlipTolerance && !_animatedSprite2D.FlipH)
         {
-            animatedSprite2D.FlipH = true;
+            _animatedSprite2D.FlipH = true;
         }
-        else if (velocity.x > -FlipTolerance && animatedSprite2D.FlipH)
+        else if (_velocity.x > FlipTolerance && _animatedSprite2D.FlipH)
         {
-            animatedSprite2D.FlipH = false;
-        }
-        
+            _animatedSprite2D.FlipH = false;
+        }   
     }
 
-    private void _onDamaged(int damagePower)
+    private void Die()
+    {
+        QueueFree();
+    }
+
+    private void OnDamaged(int damagePower)
     {
         // implement damaged to entities
+        HealthPoint -= damagePower;
+        GD.Print("enemy : ", HealthPoint);
     }
 }
