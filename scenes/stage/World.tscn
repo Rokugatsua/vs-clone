@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/stage/World.cs" type="Script" id=2]
-[ext_resource path="res://assets/test/new_noisetexture.tres" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/ground/ground_1024x512.png" type="Texture" id=3]
 [ext_resource path="res://scenes/entities/enemies/skelet/Skelet.tscn" type="PackedScene" id=5]
 
 [node name="World" type="Node2D"]
@@ -14,11 +14,235 @@ position = Vector2( 400, 155 )
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 1024, 512 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2( 481, 280 )
 texture = ExtResource( 3 )
+centered = false
 
 [node name="EnemiesGroup" type="Node2D" parent="."]
 
 [node name="Skelet" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( 23, -8 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet2" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -35, -45 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet3" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -38, -1 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet4" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -59, 9 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet5" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -98, 24 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet6" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -57, -33 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet7" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( 31, -56 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet8" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( 70, -21 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet9" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( 72, 8 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet10" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( 45, 21 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet11" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( 154, -67 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet12" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( 107, -71 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet13" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -6, -74 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet14" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( 55, -82 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet15" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( 70, -51 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet16" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( 171, 7 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet17" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -106, 41 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet18" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -78, 51 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet19" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -39, 63 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet20" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -110, 68 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet21" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -132, -16 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet22" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -148, 19 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet23" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -94, -22 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet24" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -5, 67 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet25" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( 16, 40 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet26" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -65, -83 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet27" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -33, 94 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet28" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( 4, 117 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet29" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -44, 69 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet30" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -31, 146 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet31" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -113, 177 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet32" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -141, 99 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet33" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -182, 112 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet34" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -107, 127 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet35" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -80, 127 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet36" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -74, 87 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet37" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -110, 96 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet38" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -151, 148 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet39" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -149, 64 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet40" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -193, 48 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet41" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -200, 90 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet42" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( 23, 88 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet43" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( 6, 16 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet44" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -16, 30 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="Skelet45" parent="EnemiesGroup" instance=ExtResource( 5 )]
+position = Vector2( -38, 30 )
+collision_layer = 1
+collision_mask = 1
