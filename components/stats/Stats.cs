@@ -1,6 +1,5 @@
 using Godot;
 using System;
-[Tool]
 public class Stats : Resource
 {
     [Signal] delegate void ChangedHealth(int health);
